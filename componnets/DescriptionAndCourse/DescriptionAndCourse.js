@@ -10,13 +10,13 @@ function DescriptionAndCourse({ product, Description }) {
       <Container fluid>
         {product ? (
           <Row>
-            <Col sm={11} lg={6}>
+            <Col sm={12} lg={6}>
               {product?.map((product) => (
                 <Course product={product.product} key={product.id} sm={12} />
               ))}
             </Col>
 
-            <Col dir="rtl" lg={{ span: 5, offset: 1 }}>
+            <Col dir="rtl" sm={12} lg={{ span: 5, offset: 1 }}>
               <Description />
             </Col>
           </Row>

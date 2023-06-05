@@ -9,8 +9,8 @@ function Course({ product }) {
   return (
     <>
       <Container fluid>
-        <Card>
-          <Row>
+        <Card $open={open}>
+          <Row className="wrapper-card">
             <Col className="wrapper-title" sm={12} md={{ span: 5 }}>
               <Row>
                 <Col className="product-name">{product.name}</Col>
@@ -24,7 +24,7 @@ function Course({ product }) {
               </Row>
             </Col>
 
-            <Col className="wrapper-detail" sm={12} md={{ span: 7 }}>
+            <Col className="wrapper-detail">
               <Row className="p-1 container-wr-front-card">
                 <Col className="wrapper-front-card">
                   <Row className="front-items">
@@ -34,9 +34,7 @@ function Course({ product }) {
                     <Col className="item" sm={5}>
                       {product.productAvailableSessions[0].hour}
                     </Col>
-                    <Col className="item" sm={{ span: 5, offset: 3 }}>
-                      {product.stringday}
-                    </Col>
+                    <Col className="item">{product.stringday}</Col>
                   </Row>
                 </Col>
                 <Col className="wrapper-back-card " md={12}>

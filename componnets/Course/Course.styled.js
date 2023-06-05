@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const Card = styled.div`
+  & .wrapper-card {
+    flex-wrap: nowrap;
+  }
   margin: 40px 30px;
   box-sizing: border-box;
   padding: 0 0;
@@ -19,6 +22,12 @@ const Card = styled.div`
   }
 
   & .wrapper-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex: ;
     color: white;
     font-size: 20px;
     text-align: center;
@@ -29,6 +38,7 @@ const Card = styled.div`
     text-overflow: ellipsis;
     max-width: 600px;
     box-sizing: border-box;
+    margin: 0 12px;
 
     & .product-name {
       padding: 20px 4px;
@@ -53,27 +63,33 @@ const Card = styled.div`
 
   & .wrapper-detail {
     transition: 0.5s;
+    margin: 0 -20px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: red;
     background-color: transparent;
-    margin: 0 0 0 10px;
+    margin: 0 -9px;
 
     & .container-wr-front-card {
+      width: 100%;
+      padding: 11px 2px;
+      min-height: 225px;
     }
 
     & .wrapper-front-card {
+      width: 100%;
+      display: flex;
       display: ${(props) => {
-        return props.$open ? "block" : "none";
+        return props.$open ? "none" : "flex";
       }};
-      display: none;
 
       left: ${(props) => {
         return props.$open ? "0" : "";
       }};
       & .front-items {
         display: flex;
+        flex-wrap: wrap;
         align-items: baseline;
         justify-content: center;
       }
@@ -99,10 +115,10 @@ const Card = styled.div`
       }
     }
     & .wrapper-back-card {
+      display: none;
       display: ${(props) => {
-        return props.$open ? "none" : "block";
+        return props.$open ? "flex" : "none";
       }};
-      display: flex;
     }
     & .wrapper-back-card ul {
       justify-content: space-evenly;

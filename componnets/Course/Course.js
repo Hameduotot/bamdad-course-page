@@ -1,92 +1,56 @@
 import React, { useState } from "react";
-import Card from "./Course.styled";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import {
+  Card,
+  FullHeightContainer,
+  FullHeightRow,
+  StyledColFlex2,
+  StyledColFlex5,
+  StyledContainer,
+  StyledH2,
+  StyledButton,
+  CardWrapper,
+  CardFrontWrapper,
+  CourseFront,
+  CourseBack,
+  CardBackWrapper 
+} from "./Course.styled";
+
 function Course({ product }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <Container fluid>
-        <Card>
-          <Row>
-            <Col className="wrapper-title" sm={12} md={{ span: 5 }}>
-              <Row>
-                <Col className="product-name">{product.name}</Col>
-              </Row>
-              <Row>
-                <Col>
-                  <button onClick={() => setOpen(!open)}>
-                    جزئیات و ثبت نام
-                  </button>
-                </Col>
-              </Row>
-            </Col>
-
-            <Col className="wrapper-detail" sm={12} md={{ span: 7 }}>
-              <Row className="p-1 container-wr-front-card">
-                <Col className="wrapper-front-card">
-                  <Row className="front-items">
-                    <Col className="item" sm={5}>
-                      شروع {product.stringstartdate.replace("1402", "")}
-                    </Col>
-                    <Col className="item" sm={5}>
-                      {product.productAvailableSessions[0].hour}
-                    </Col>
-                    <Col className="item" sm={{ span: 5, offset: 3 }}>
-                      {product.stringday}
-                    </Col>
-                  </Row>
-                </Col>
-                <Col className="wrapper-back-card " md={12}>
-                  <Row>
-                    <Col>
-                      <ul>
-                        <li>مدرس :{product.teacherName}</li>
-                        <li>ظرفیت:{product.remainSession} نفر</li>
-                        <li>تعداد جلسات : {product.remainSession} جلسه</li>
-                        <li>مدت دوره : {product.classHour} ساعت</li>
-                        <li>
-                          هزینه ثبت نام : {product.price.toLocaleString()}ریال
-                        </li>
-                        <li>
-                          تخفیف :
-                          {(
-                            (product.price * product.discountPercent) /
-                            100
-                          ).toLocaleString()}
-                          ریال
-                        </li>
-                        <li>
-                          هزینه قابل پرداخت : {product.payable.toLocaleString()}{" "}
-                          ریال
-                        </li>
-                        <li>
-                          <div className="wrapper-button">
-                            <button>ثبت نام</button>
-                            <button>درخواست مشاوره</button>
-                          </div>
-                        </li>
-                      </ul>
-                    </Col>
-                    {/* <Col className="d-md-flex justify-content-md-center flex-md-column">
-                    <span className="datails">
-                      شروع {product.stringstartdate.replace("1402", "")}
-                    </span>
-                    <span className="datails">
-                      {product.productAvailableSessions[0].hour}
-                    </span>
-                    <span className="datails">{product.stringday}</span>
-                  </Col> */}
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Card>
-      </Container>
-    </>
+    <Card>
+      <FullHeightContainer>
+        <FullHeightRow>
+          <StyledColFlex2 sm={12} md={6} lg={4}>
+            <StyledContainer>
+              <StyledH2>{product.name}</StyledH2>
+              <StyledButton
+                variant="info"
+                onClick={() => setOpen(!open)}
+                size="sm"
+              >
+                جزئیات و ثبت نام
+              </StyledButton>
+            </StyledContainer>
+          </StyledColFlex2>
+          <StyledColFlex5 sm={12} md={6} lg={8}>
+            <CardWrapper>
+              <CardFrontWrapper open={open}>
+                <CourseFront
+                  startFrom={product.stringstartdate}
+                  hour={product.productAvailableSessions[0].hour}
+                  day={product.stringday}
+                />
+              </CardFrontWrapper>
+              <CardBackWrapper open={!open}>
+                <CourseBack product={product} />
+              </CardBackWrapper>
+            </CardWrapper>
+          </StyledColFlex5>
+        </FullHeightRow>
+      </FullHeightContainer>
+    </Card>
   );
 }
 

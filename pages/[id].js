@@ -35,7 +35,7 @@ export default function Home({ res }) {
 export async function getServerSideProps(context) {
   const { params } = context;
   const { id } = params;
-  
+
   let res = await fetch("https://tms.bamdad.co/api/Lesson/GetLessonDet", {
     method: "POST",
     mode: "cors",

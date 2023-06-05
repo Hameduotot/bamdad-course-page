@@ -1,10 +1,14 @@
 * {
   font-family: "Sahel", sans-serif;
-  
 }
 
 @font-face {
   font-family: "Sahel";
   src: url("../public/fonts/Sahel-Bold-FD.woff2") format("woff2"),
     url("../public/fonts/Sahel-Bold-FD.woff") format("woff");
+}
+
+img {
+  height: auto;
+  max-width: 100%;
 }

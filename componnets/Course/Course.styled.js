@@ -1,153 +1,168 @@
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import styled from "styled-components";
+import { Badge } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
-const Card = styled.div`
-  & .wrapper-card {
-    flex-wrap: nowrap;
+export const StyledBadge = styled(Badge)`
+  padding: 8px;
+`;
+
+export function CourseFront({ startFrom, hour, day }) {
+  return (
+    <FullHeightContainer>
+      <CourseDetailWrapper>
+        <StyledBadge>شروع {startFrom.replace("1402", "")}</StyledBadge>
+        <StyledBadge>{hour}</StyledBadge>
+        <StyledBadge>{day}</StyledBadge>
+      </CourseDetailWrapper>
+    </FullHeightContainer>
+  );
+}
+
+const StyledUL = styled.ul`
+  color: rgb(4, 106, 181);
+  list-style: none;
+  font-size: 12px;
+
+  & li {
+    padding: 2px;
   }
-  margin: 40px 30px;
+`;
+
+const ButtonWrapper = styled(Container)`
+  & button {
+    margin: 2px;
+    font-size: 14px;
+  }
+`;
+
+export function CourseBack({ product }) {
+  return (
+    <Container>
+      <StyledUL>
+        <li>مدرس :{product.teacherName}</li>
+        <li>ظرفیت:{product.remainSession} نفر</li>
+        <li>تعداد جلسات : {product.remainSession} جلسه</li>
+        <li>مدت دوره : {product.classHour} ساعت</li>
+        <li>هزینه ثبت نام : {product.price.toLocaleString()}ریال</li>
+        <li>
+          تخفیف :
+          {((product.price * product.discountPercent) / 100).toLocaleString()}
+          ریال
+        </li>
+        <li>هزینه قابل پرداخت : {product.payable.toLocaleString()} ریال</li>
+      </StyledUL>
+      <ButtonWrapper>
+        <Button>ثبت نام</Button>
+        <Button variant="secondary">درخواست مشاوره</Button>
+      </ButtonWrapper>
+    </Container>
+  );
+}
+
+export const Card = styled.div`
   box-sizing: border-box;
-  padding: 0 0;
+  padding: 16px 16px;
   background-color: rgba(255, 255, 255, 1);
   color: #000;
   border-radius: 10px;
   box-shadow: 0px 19px 38px 0px rgba(0, 0, 0, 0.3),
     0px 15px 12px 0px rgba(0, 0, 0, 0.22);
+  margin: 16px 0;
+  height: 1px;
+  min-height: 250px;
 
-  & .container {
-    overflow: hidden;
+  @media (min-width: 320px) {
+    min-height: 350px;
   }
-
-  & * {
-    transition: all 0.5s ease;
-  }
-
-  & .wrapper-title {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex: ;
-    color: white;
-    font-size: 20px;
-    text-align: center;
-    background-color: #445d0f63;
-    border-radius: 10px 0 0 10px;
-    text-align: center;
-    white-space: wrap;
-    text-overflow: ellipsis;
-    max-width: 600px;
-    box-sizing: border-box;
-    margin: 0 12px;
-
-    & .product-name {
-      padding: 20px 4px;
-    }
-    & button {
-      margin-bottom: 10px;
-      padding: 5px 10px;
-      background: rgba(255, 255, 255, 0.63);
-      border-radius: 16px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(2.7px);
-      -webkit-backdrop-filter: blur(2.7px);
-      border: 1px solid rgba(255, 255, 255, 0.69);
-      &:hover {
-        color: rgba(255, 255, 255, 0.63);
-        background-color: #000;
-      }
-    }
-  }
-
-  /* wrapper title end */
-
-  & .wrapper-detail {
-    transition: 0.5s;
-    margin: 0 -20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: red;
-    background-color: transparent;
-    margin: 0 -9px;
-
-    & .container-wr-front-card {
-      width: 100%;
-      padding: 11px 2px;
-      min-height: 225px;
-    }
-
-    & .wrapper-front-card {
-      width: 100%;
-      display: flex;
-      display: ${(props) => {
-        return props.$open ? "none" : "flex";
-      }};
-
-      left: ${(props) => {
-        return props.$open ? "0" : "";
-      }};
-      & .front-items {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        justify-content: center;
-      }
-      & .item {
-        transition-delay: 0s;
-        box-sizing: border-box;
-        color: black;
-        font-weight: bold;
-        direction: rtl;
-        margin: 10px;
-        padding: 10px;
-        background-color: #445d0f63;
-        font-size: 14px;
-        border-radius: 10px;
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-        font-size: 15px;
-        text-align: center;
-        border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(9px);
-        -webkit-backdrop-filter: blur(9px);
-        border: 1px solid rgba(255, 255, 255, 0.38);
-      }
-    }
-    & .wrapper-back-card {
-      display: none;
-      display: ${(props) => {
-        return props.$open ? "flex" : "none";
-      }};
-    }
-    & .wrapper-back-card ul {
-      justify-content: space-evenly;
-      min-width: 175px;
-      direction: rtl;
-      color: rgb(4, 106, 181);
-      list-style: none;
-      right: 0;
-      top: 0;
-      z-index: 1;
-      font-size: 12px;
-
-      & .wrapper-button {
-        margin: 10px;
-      }
-    }
-  }
-  & span.datails {
-    direction: rtl;
-    margin: 2px 8px;
-    padding: 4px;
-    color: rgb(4, 106, 181);
-    font-size: 12px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-    font-size: 12px;
-    text-align: center;
-    white-space: nowrap;
+  @media (min-width: 481px) {
+    min-height: 250px;
   }
 `;
 
-export default Card;
+export const StyledContainer = styled(Container)`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+`;
+
+export const FullHeightContainer = styled(Container)`
+  height: 100%;
+`;
+
+export const FullHeightRow = styled(Row)`
+  height: 100%;
+  @media (min-width: 320px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 481px) {
+    flex-direction: unset;
+  }
+`;
+
+const CourseDetailWrapper = styled(FullHeightRow)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+
+export const StyledH2 = styled.h2`
+  @media (min-width: 320px) {
+    font-size: 16px;
+  }
+  @media (min-width: 481px) {
+    font-size: 16px;
+    text-align: right;
+  }
+`;
+
+export const StyledButton = styled(Button)`
+  @media (min-width: 992px) {
+    font-size: 12px;
+  }
+`;
+
+export const CardWrapper = styled.div`
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+`;
+
+export const CardFrontWrapper = styled.div`
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  right: ${({ open }) => (open ? 0 : "-400px")};
+  transition: all 1s ease 0s;
+`;
+export const CardBackWrapper = styled.div`
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  left: ${({ open }) => (open ? 0 : "-400px")};
+  transition: all 1s ease 0s;
+`;
+
+export const StyledColFlex2 = styled(Col)`
+  @media (min-width: 320px) {
+    flex: 2;
+  }
+
+  @media (min-width: 481px) {
+    flex: unset;
+  }
+`;
+export const StyledColFlex5 = styled(Col)`
+  @media (min-width: 320px) {
+    flex: 5;
+  }
+
+  @media (min-width: 481px) {
+    flex: unset;
+  }
+`;
